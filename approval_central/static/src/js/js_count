@@ -1,0 +1,34 @@
+/** @odoo-module **/
+import { patch } from 'web.utils';
+import { Menu } from '@web/core/menu/menu';
+import rpc from 'web.rpc';
+
+patch(Menu.prototype, 'approval_menu_dynamic_count', {
+    async start() {
+        await this._super(...arguments);
+
+        // Call Python method to get counts
+        const counts = await rpc.query({
+            model: 'approval.menu.count',
+            method: 'get_user_approval_counts',
+        });
+
+        // Update menus
+        this.el.querySelectorAll('li.o_menu_root, li.o_menu').forEach(menu => {
+            const moduleName = menu.dataset.module;
+            if (!moduleName) return;
+
+            const count = counts[moduleName] || 0;
+            if (count === 0) {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+                // Append count to menu name
+                const span = menu.querySelector('.oe_menu_text');
+                if (span) {
+                    span.textContent = `${span.textContent} (${count})`;
+                }
+            }
+        });
+    },
+});

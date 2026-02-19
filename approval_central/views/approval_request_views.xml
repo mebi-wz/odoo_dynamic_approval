@@ -1,0 +1,211 @@
+<odoo>
+<record id="view_approval_request_kanban_dashboard" model="ir.ui.view">
+  <field name="name">approval.request.kanban.dashboard</field>
+  <field name="model">approval.request</field>
+  <field name="arch" type="xml">
+    <kanban create="false" class="o_kanban_dashboard">
+      <templates>
+        <t t-name="kanban-box">
+          <div class="oe_kanban_global_click o_kanban_record">
+            <div class="o_kanban_primary_left">
+              <div class="o_kanban_title">
+                <strong>
+                  <field name="flow_id"/>
+                </strong>
+              </div>
+              <div>Status: <field name="status"/></div>
+              <div>Requested By: <field name="requested_by"/></div>
+              <strong>Target:</strong>
+              <field name="target_record_id" widget="reference"/>
+            </div>
+            <div class="o_kanban_primary_right">
+              <button type="object" name="action_open_target_record"
+                      class="btn btn-sm btn-primary"
+                      modifiers="{'invisible': ['|', ('res_model', '=', False), ('res_id', '=', False)]}">
+                View
+              </button>
+            </div>
+            <!-- Activity bag icon with count -->
+            <div class="o_kanban_bottom_right">
+              <field name="activity_ids" widget="mail_activity"/>
+            </div>
+          </div>
+        </t>
+        <field name="step_progress" widget="html" readonly="1"/>
+      </templates>
+    </kanban>
+  </field>
+</record>
+
+  <!-- Tree View -->
+  <record id="view_approval_request_tree" model="ir.ui.view">
+    <field name="name">approval.request.tree</field>
+    <field name="model">approval.request</field>
+    <field name="arch" type="xml">
+      <list create="false">
+         <header>
+          <button name="action_approve_all"
+                  type="object"
+                  string="Approve All"
+                  class="btn-primary"
+                  confirm="Are you sure you want to approve all selected requests?"
+                  icon="fa-check"/>
+        </header>
+         <field name="flow_id"  readonly="1"/>
+         <field name="target_record_id" widget="reference" options="{'no_open': False}"/>
+<!--        <field name="res_model"/>-->
+<!--        <field name="res_id"/>-->
+<!--        <field name="current_step_id"/>-->
+        <field name="status"  readonly="1"/>
+        <field name="requested_by"  readonly="1"/>
+        <field name="approved_date"  readonly="1"/>
+        <field name="rejected_date"  readonly="1"/>
+      </list>
+    </field>
+  </record>
+
+
+ 
+  <!-- Form View -->
+  <record id="view_approval_request_form" model="ir.ui.view">
+    <field name="name">approval.request.form</field>
+    <field name="model">approval.request</field>
+    <field name="arch" type="xml">
+      <form  create="false" edit="false">
+<sheet>
+  <div class="oe_button_box" name="button_box">
+    <button name="action_open_target_record"
+            type="object"
+            class="oe_stat_button"
+            icon="fa-eye"
+            modifiers="{'invisible': ['|', ('res_model', '=', False), ('res_id', '=', False)]}">
+      <div class="o_stat_info">
+        <span class="o_stat_text">View Target</span>
+      </div>
+    </button>
+  </div>
+  <group readonly="1">
+    <field name="target_record_id" widget="reference" options="{'no_open': False}" />
+    <field name="flow_id"  readonly="1"/>
+    <field name="res_model" readonly="1"/>
+    <field name="res_id" readonly="1"/>
+    <field name="current_step_id" readonly="1"/>
+    <field name="status"  readonly="1"/>
+    <field name="requested_by"  readonly="1"/>
+    <field name="approver_ids" readonly="1"/>
+    <field name="approved_date" readonly="1"/>
+    <field name="rejected_date" readonly="1"/>
+    <field name="remarks"  readonly="1"/>
+  </group>
+  <field name="step_progress" widget="html" readonly="1"/>
+</sheet>
+
+      </form>
+    </field>
+  </record>
+
+  <!-- Search View with Filters -->
+  <record id="view_approval_request_search" model="ir.ui.view">
+    <field name="name">approval.request.search</field>
+    <field name="model">approval.request</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="flow_id"/>
+        <field name="status"/>
+        <field name="requested_by"/>
+        <filter name="my_requests" string="My Requests" domain="[('create_uid', '=', uid)]"/>
+        <filter name="pending" string="Pending" domain="[('status', '=', 'pending')]"/>
+        <filter name="approved" string="Approved" domain="[('status', '=', 'approved')]"/>
+        <filter name="rejected" string="Rejected" domain="[('status', '=', 'rejected')]"/>
+      </search>
+    </field>
+  </record>
+
+
+  <!-- Window Action -->
+  <record id="action_approval_request" model="ir.actions.act_window">
+    <field name="name">Approval Requests</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+      <field name="search_view_id" ref="view_approval_request_search"/>
+  <field name="domain">['|', ('requested_by', '=', uid), ('approver_ids', 'in', [uid])]</field>
+  </record>
+  <record id="action_approval_request_customized_inventory" model="ir.actions.act_window">
+    <field name="name">Inter Store Transfers</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'customized_inventory'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+  <record id="action_approval_request_leave" model="ir.actions.act_window" >
+    <field name="name">Time off Request Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'leave'),('res_model', '=', 'hr.leave'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+
+  <record id="action_approval_request_allocation" model="ir.actions.act_window" >
+    <field name="name">Allocation Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'allocation'),('res_model', '=', 'hr.leave.allocation'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+  <record id="action_approval_request_onduty" model="ir.actions.act_window" >
+    <field name="name">OnDuty Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'onduty'),('res_model', '=', 'onduty.report'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+  <record id="action_approval_request_descipline" model="ir.actions.act_window" >
+    <field name="name">Descipline Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'hr'),('res_model', '=', 'employee.discipline'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+  <record id="action_approval_request_resignation" model="ir.actions.act_window" >
+    <field name="name">Resignation Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'hr'),('res_model', '=', 'employee.resignation'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+  <record id="action_approval_request_appraisal" model="ir.actions.act_window" >
+    <field name="name">Appraisal Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'hr'),('res_model', '=', 'employee.appraisal'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+<!-- inventory -->
+  <record id="action_approval_request_stock_picking" model="ir.actions.act_window">
+    <field name="name">Stock Transfer Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'stock'), ('res_model', '=', 'interstock.transfer'), ('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+
+  
+<!-- Purchase Order  The one -->
+
+<record id="action_approval_request_foreign_purchase" model="ir.actions.act_window" >
+    <field name="name">Foreign Purchase Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'custom_procurement_module'),('res_model', '=', 'purchase.order'),('approval_type', '=', 'foreign_purchase'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+
+  <record id="action_approval_request_local_purchase" model="ir.actions.act_window" >
+    <field name="name">Local Purchase Approvals</field>
+    <field name="res_model">approval.request</field>
+    <field name="view_mode">kanban,list,form</field>
+    <field name="domain">[('module_name', '=', 'purchase'),('res_model', '=', 'purchase.order'),('approval_type', '=', 'local_purchase'),('approver_ids', 'in', [uid])]</field>
+    <field name="context">{}</field>
+  </record>
+
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 🔹 Automatic system actions -->
+    <record id="approval_action_auto_initiate" model="approval.action">
+        <field name="name">Auto Initiate</field>
+        <field name="code">auto_initiate</field>
+    </record>
+
+    <record id="approval_action_auto_condition" model="approval.action">
+        <field name="name">Auto Condition</field>
+        <field name="code">auto_condition</field>
+    </record>
+
+    <!-- 🔹 User/manual actions -->
+    <record id="approval_action_approve" model="approval.action">
+        <field name="name">Approve</field>
+        <field name="code">approve</field>
+    </record>
+
+    <record id="approval_action_forward" model="approval.action">
+        <field name="name">Forward</field>
+        <field name="code">forward</field>
+    </record>
+
+    <record id="approval_action_reject" model="approval.action">
+        <field name="name">Reject</field>
+        <field name="code">reject</field>
+    </record>
+
+    <record id="approval_action_resubmit" model="approval.action">
+        <field name="name">Resubmit</field>
+        <field name="code">resubmit</field>
+    </record>
+
+    <record id="approval_action_agreement_reached" model="approval.action">
+        <field name="name">Agreement Reached</field>
+        <field name="code">agreement_reached</field>
+    </record>
+
+    <record id="approval_action_amend" model="approval.action">
+        <field name="name">Amend</field>
+        <field name="code">amend</field>
+    </record>
+
+    <record id="approval_action_revert" model="approval.action">
+        <field name="name">Revert</field>
+        <field name="code">revert</field>
+    </record>
+
+    <record id="approval_action_pass_to_legal" model="approval.action">
+        <field name="name">Pass To Legal</field>
+        <field name="code">pass_to_legal</field>
+    </record>
+</odoo>

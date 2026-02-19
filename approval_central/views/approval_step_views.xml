@@ -1,0 +1,97 @@
+<odoo>
+  <!-- Tree View -->
+  <record id="view_approval_step_tree" model="ir.ui.view">
+    <field name="name">approval.step.tree</field>
+    <field name="model">approval.step</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="flow_id"/>
+        <field name="name"/>
+        <field name="sequence"/>
+        <field name="role_id"/>
+        <field name="is_initiator"/>
+        <field name="is_condition"/>
+        <field name="company_id"/>
+        <field name="branch_id"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form View -->
+  <record id="view_approval_step_form" model="ir.ui.view">
+    <field name="name">approval.step.form</field>
+    <field name="model">approval.step</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="flow_id"/>
+            <field name="name"/>
+            <field name="sequence"/>
+            <field name="is_initiator"/>
+            <field name="is_organization"/>
+            <field name="is_final"/>
+            <field name="is_employee_step"/>
+            <field name="role_id"   invisible="is_initiator == True"
+            />
+            <field name="committee_approval" />
+            <field name="required_approval_percent" invisible="committee_approval == False"/>
+            <field name="is_condition"/>
+            <field name="cross_branch"/>
+            <field name="company_id"/>
+            <field name="branch_id"/>
+            <field name="fallback_branch_id"/>
+          </group>
+
+          <notebook>
+            <page string="Conditions" invisible="is_condition == False">
+                <field name="condition_ids">
+                    <list editable="bottom">
+
+                        <field name="field_to_check"/>
+
+                        <field name="custom_field_name"
+                               invisible="field_to_check != 'custom_field'"/>
+
+                        <field name="aggregation"
+                               invisible="field_to_check in ('user_group_id', 'last_updator_group')"/>
+
+                        <field name="operator"/>
+
+                        <field name="group_id"
+                               invisible="field_to_check not in ('user_group_id', 'last_updator_group')"/>
+
+                        <field name="value"
+                               invisible="field_to_check in ('user_group_id', 'last_updator_group')"/>
+
+                        <field name="next_step_id"/>
+
+                    </list>
+                </field>
+            </page>
+
+            <page string="Next Steps">
+              <field name="next_step_ids" widget="many2many_tags"/>
+            </page>
+
+            <page string="Actions" invisible="is_condition == True">
+              <field name="action_ids">
+                <list editable="bottom">
+                  <field name="action_id"/>
+                  <field name="next_step_id"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_approval_step" model="ir.actions.act_window">
+    <field name="name">Approval Steps</field>
+    <field name="res_model">approval.step</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

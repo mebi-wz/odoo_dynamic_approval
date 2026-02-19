@@ -1,0 +1,10 @@
+<odoo>
+  <data noupdate="0">
+    <!-- Create Group Category -->
+    <record id="module_category_approval" model="ir.module.category">
+      <field name="name">Approvals</field>
+      <field name="description">Groups related to the Approval Workflow</field>
+      <field name="sequence">20</field>
+    </record>
+  </data>
+</odoo>

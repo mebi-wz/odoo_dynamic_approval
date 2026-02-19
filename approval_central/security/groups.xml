@@ -1,0 +1,90 @@
+<odoo>
+  <data noupdate="0">
+
+    <record id="group_approval_hr" model="res.groups">
+      <field name="name">HR</field>
+     <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+
+    <record id="group_approval_supervisor" model="res.groups">
+      <field name="name">Supervisor</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+
+    <record id="group_approval_initiator" model="res.groups">
+      <field name="name">Initiator</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_op_director" model="res.groups">
+      <field name="name">Operation Director</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_user" model="res.groups">
+      <field name="name">User</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+     <record id="group_approval" model="res.groups">
+      <field name="name">Approval</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_dept_manager" model="res.groups">
+      <field name="name">Department Manager</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+
+    <record id="group_approval_gm" model="res.groups">
+      <field name="name">General Manager</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_payroll" model="res.groups">
+      <field name="name">Payroll</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_property" model="res.groups">
+      <field name="name">Property Manager</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_it" model="res.groups">
+      <field name="name">IT Manager</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+      <record id="group_approval_property" model="res.groups">
+      <field name="name">Property Manager</field>
+    <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+
+    <record id="group_approval_director" model="res.groups">
+      <field name="name">Director</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+
+    <record id="group_approval_md" model="res.groups">
+      <field name="name">Managing Director</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_owner" model="res.groups">
+      <field name="name">Owner</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_finance_director" model="res.groups">
+      <field name="name">Finance Director</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_finance_head" model="res.groups">
+      <field name="name">Finance Head</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <record id="group_approval_hr_gm" model="res.groups">
+      <field name="name">HR General Manager</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+     <record id="group_approval_hr_director" model="res.groups">
+      <field name="name">Hr Director</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record>
+    <!-- <record id="group_approval_legal" model="res.groups">
+      <field name="name">Legal</field>
+      <field name="category_id" ref="approval_central.module_category_approval"/>
+    </record> -->
+  </data>
+</odoo>

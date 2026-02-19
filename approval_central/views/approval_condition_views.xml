@@ -1,0 +1,68 @@
+<odoo>
+  <!-- Tree View -->
+  <record id="view_approval_condition_tree" model="ir.ui.view">
+    <field name="name">approval.condition.tree</field>
+    <field name="model">approval.condition</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="step_id"/>
+        <field name="sequence"/>
+        <field name="field_to_check"/>
+        <field name="custom_field_name"/>
+        <field name="operator"/>
+        <field name="group_id"/>
+        <field name="value"/>
+        <field name="next_step_id"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form View -->
+  <record id="view_approval_condition_form" model="ir.ui.view">
+      <field name="name">approval.condition.form</field>
+      <field name="model">approval.condition</field>
+      <field name="arch" type="xml">
+          <form string="Approval Condition">
+              <sheet>
+                  <group>
+                      <field name="step_id"/>
+                      <field name="field_to_check"/>
+                      <field name="sequence"/>
+
+                      <!-- Use required with domain for conditional visibility -->
+                      <field name="custom_field_name"
+                             invisible="field_to_check != 'custom_field'"/>
+
+                      <field name="aggregation"
+                             invisible="field_to_check in ('user_group_id', 'last_updator_group')"/>
+
+
+                      <field name="operator"/>
+
+                      <field name="group_id"
+                            invisible="field_to_check not in ('user_group_id', 'last_updator_group')"/>
+
+
+                      <field name="value"
+                            invisible="field_to_check in ('user_group_id', 'last_updator_group')"/>
+
+
+                      <field name="next_step_id"/>
+                  </group>
+              </sheet>
+          </form>
+      </field>
+  </record>
+  <!-- Action -->
+  <record id="action_approval_condition" model="ir.actions.act_window">
+    <field name="name">Approval Conditions</field>
+    <field name="res_model">approval.condition</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+<!--  &lt;!&ndash; Menu Item &ndash;&gt;-->
+<!--  <menuitem id="menu_approval_condition"-->
+<!--            name="Conditions"-->
+<!--            parent="menu_approval_root"-->
+<!--            action="action_approval_condition"/>-->
+</odoo>

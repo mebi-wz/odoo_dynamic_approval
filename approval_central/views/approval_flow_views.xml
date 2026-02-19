@@ -1,0 +1,54 @@
+<odoo>
+  <record id="view_approval_flow_tree" model="ir.ui.view">
+    <field name="name">approval.flow.tree</field>
+    <field name="model">approval.flow</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="request_type"/>
+        <field name="request_model_id"
+               context="{'create': False}"
+                   options="{'no_create': True}"/>
+        <field name="company_id"/>
+        <field name="active"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_approval_flow_form" model="ir.ui.view">
+    <field name="name">approval.flow.form</field>
+    <field name="model">approval.flow</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="request_type"/>
+            <field name="request_model_id"
+       context="{'create': False}"
+       options="{'no_create': True}"/>
+            <field name="company_id"/>
+            <field name="active"/>
+          </group>
+          <notebook>
+            <page string="Steps">
+              <field name="step_ids">
+                <list editable="bottom">
+                  <field name="name"/>
+                  <field name="sequence"/>
+                  <field name="role_id"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_approval_flow" model="ir.actions.act_window">
+    <field name="name">Approval Flows</field>
+    <field name="res_model">approval.flow</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

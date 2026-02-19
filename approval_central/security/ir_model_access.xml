@@ -1,0 +1,86 @@
+<odoo>
+  <record id="access_ir_model_user" model="ir.model.access">
+    <field name="name">ir.model access for approval user</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_user"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <record id="access_ir_model_supervisor" model="ir.model.access">
+    <field name="name">ir.model access for approval supervisor</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_supervisor"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+  <record id="access_ir_model_dept_manager" model="ir.model.access">
+    <field name="name">ir.model access for approval Department Manager</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_dept_manager"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  <!-- Repeat for other groups -->
+  </record>
+    <record id="access_ir_model_approval_gm" model="ir.model.access">
+    <field name="name">ir.model access for approval General Manager</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_gm"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+  <record id="access_ir_model_approval_director" model="ir.model.access">
+    <field name="name">ir.model access for approval Director</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_director"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+  <record id="access_ir_model_group_approval_md" model="ir.model.access">
+    <field name="name">ir.model access for approval Managing Director</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_md"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+  <record id="access_ir_model_group_approval_owner" model="ir.model.access">
+    <field name="name">ir.model access for approval owner</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_owner"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+    <record id="access_ir_model_group_approval_finance_director" model="ir.model.access">
+    <field name="name">ir.model access for approval Finance Director</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_finance_director"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <record id="access_ir_model_group_approval_finance_head" model="ir.model.access">
+    <field name="name">ir.model access for approval Finance Head</field>
+    <field name="model_id" ref="base.model_ir_model"/>
+    <field name="group_id" ref="approval_central.group_approval_finance_director"/>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+</odoo>

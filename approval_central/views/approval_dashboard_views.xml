@@ -1,0 +1,95 @@
+<odoo>
+
+  <!-- ✅ Graph View: Bar Chart by Module and Status -->
+  <record id="view_dashboard_approval_graph" model="ir.ui.view">
+    <field name="name">dashboard.approval.request.graph</field>
+    <field name="model">dashboard.approval.request</field>
+    <field name="arch" type="xml">
+      <graph string="Approval Dashboard Graph" type="bar">
+        <field name="module_name" type="row"/>
+        <field name="count" type="measure"/>
+        <field name="status" type="col"/>
+      </graph>
+    </field>
+  </record>
+
+  <!-- ✅ Pie Chart: Module → Model → Status (2-level fallback if needed) -->
+  <record id="view_dashboard_approval_graph_pie" model="ir.ui.view">
+    <field name="name">dashboard.approval.request.graph.pie</field>
+    <field name="model">dashboard.approval.request</field>
+    <field name="arch" type="xml">
+      <graph string="Approval Pie Chart" type="pie">
+        <field name="module_name" type="row"/>
+        <field name="res_model" type="row"/>
+        <field name="count" type="measure"/>
+      </graph>
+    </field>
+  </record>
+
+  <!-- ✅ Tree View -->
+  <record id="view_dashboard_approval_tree" model="ir.ui.view">
+    <field name="name">dashboard.approval.request.tree</field>
+    <field name="model">dashboard.approval.request</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="module_name"/>
+        <field name="res_model"/>
+        <field name="status"/>
+        <field name="count"/>
+        <button name="open_filtered_requests" string="View" type="object" icon="fa-search"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- ✅ Kanban View (Inventory-Style Dashboard Cards) -->
+  <record id="view_dashboard_approval_kanban" model="ir.ui.view">
+    <field name="name">dashboard.approval.request.kanban</field>
+    <field name="model">dashboard.approval.request</field>
+    <field name="arch" type="xml">
+      <kanban class="o_kanban_dashboard">
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_card o_kanban_global_click">
+              <div class="o_kanban_primary_left">
+                <strong><field name="module_name"/></strong><br/>
+                <span><field name="res_model"/></span>
+              </div>
+              <div class="mt16">
+                <div>Status: <strong><field name="status"/></strong></div>
+                <div>Count: <strong><field name="count"/></strong></div>
+              </div>
+              <div class="o_kanban_footer mt8">
+                <button type="object"
+                        name="open_filtered_requests"
+                        string="Open"
+                        class="btn btn-sm btn-primary"/>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <!-- ✅ Search View -->
+  <record id="view_dashboard_approval_search" model="ir.ui.view">
+    <field name="name">dashboard.approval.request.search</field>
+    <field name="model">dashboard.approval.request</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="module_name"/>
+        <field name="res_model"/>
+        <field name="status"/>
+      </search>
+    </field>
+  </record>
+
+  <!-- ✅ Action -->
+  <record id="action_dashboard_approval_request" model="ir.actions.act_window">
+    <field name="name">Approval Dashboard</field>
+    <field name="res_model">dashboard.approval.request</field>
+    <field name="view_mode">kanban,graph,list</field>
+    <field name="search_view_id" ref="view_dashboard_approval_search"/>
+  </record>
+
+</odoo>

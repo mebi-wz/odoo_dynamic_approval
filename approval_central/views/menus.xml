@@ -1,0 +1,69 @@
+<odoo>
+  <menuitem id="menu_approval_root" name="Approval Workflow" sequence="10" groups="approval_central.group_approval"/>
+ <menuitem id="menu_approval_dashboard" name="Approval Dashboard" parent="menu_approval_root" action="action_dashboard_approval_request" sequence="1" groups="base.group_system"/>
+<menuitem id="menu_approval_inventory" name="Inventory Approvals"
+         parent="menu_approval_root" />
+<menuitem id="menu_approval_inter_store" name="Inter Store Transfer "
+          parent="menu_approval_inventory" action="action_approval_request_customized_inventory"/>
+<!--<menuitem id="menu_approval_purchase" name="Purchase Approvals"-->
+<!--          parent="menu_approval_root" />-->
+<!--<menuitem id="menu_approval_foreign_purchase" name="Foreign Purchase Approvals"-->
+<!--          parent="menu_approval_purchase" action="action_dashboard_approval_request"/>-->
+<!-- <menuitem id="menu_approval_foreign_payment" name="Foreign Payment Approvals"-->
+<!--          parent="menu_approval_foreign_purchase" action="action_dashboard_approval_request" />-->
+<!-- <menuitem id="menu_approval_local_purchase" name="Local Purchase Approvals"-->
+<!--          parent="menu_approval_purchase"  action="action_dashboard_approval_request"/>-->
+
+<!--<menuitem id="menu_approval_hr" name="HR Approvals"-->
+<!--          parent="menu_approval_root" action="action_dashboard_approval_request"/>-->
+<!-- <menuitem id="submenu_approval_descipline" name="Descipline Approvals"-->
+<!--          parent="menu_approval_hr"  action="action_approval_request_descipline"/>-->
+<!-- <menuitem id="submenu_approval_resignation" name="Resignation Approvals"-->
+<!--          parent="menu_approval_hr"  action="action_approval_request_resignation"/>-->
+<!-- <menuitem id="submenu_approval_appraisal" name="Appraisal Approvals"-->
+<!--          parent="menu_approval_hr"  action="action_approval_request_appraisal"/>-->
+
+
+             <!-- inventory -->
+ <!-- <menuitem id="menu_approval_inter_store" name="Inter-Store Transfer"
+          parent="menu_approval_inventory"  action="action_approval_request_stock_picking"/>
+
+ <menuitem id="menu_approval_inventory" name="Inventory Approvals"
+          parent="menu_approval_root"  sequence="7"/> -->
+          
+          <!-- time off -->
+
+ <menuitem id="menu_approval_Leave" name="Time off Approvals"
+          parent="menu_approval_root"  sequence="4"/>
+ <menuitem id="menu_approval_Timeoff" name="Time off Request Approvals"
+          parent="menu_approval_Leave"  action="action_approval_request_leave"/>
+ <menuitem id="menu_approval_onduty" name="OnDuty Approvals"
+          parent="menu_approval_Leave"  action="action_approval_request_onduty"/>
+
+<!-- <menuitem id="menu_approval_Sales" name="Sales Approvals"-->
+<!--          parent="menu_approval_root" action="action_dashboard_approval_request"/>-->
+
+<!--<menuitem id="menu_approval_accounting" name="Accounting Approvals"-->
+<!--          parent="menu_approval_root" action="action_dashboard_approval_request"/>-->
+
+<!--<menuitem id="menu_approval_workshop" name="Workshop Approvals"-->
+<!--          parent="menu_approval_root" action="action_dashboard_approval_request"/>-->
+ <menuitem id="menu_approval_config"
+          name="Configuration"
+          parent="menu_approval_root"
+          sequence="2"
+          groups="base.group_system"/>
+  <menuitem id="menu_approval_delegate_root" name="Delegations" parent="menu_approval_root" groups="approval_central.group_approval_md,approval_central.group_approval_gm,approval_central.group_approval_dept_manager,base.group_system,approval_central.group_approval_director,approval_central.group_approval_owner,approval_central.group_approval_hr"/>
+
+   <menuitem id="menu_approval_delegate" name="Approval Delegations"
+              parent="menu_approval_delegate_root"
+              action="action_approval_delegate" sequence="2" />
+
+ <menuitem id="approval_action_menu" name="Manage Actions" parent="menu_approval_config" action="action_approval_action"/>
+  <menuitem id="menu_approval_flow" name="Approval Flows" parent="menu_approval_config" action="action_approval_flow"/>
+  <menuitem id="menu_approval_step" name="Approval Steps" parent="menu_approval_config" action="action_approval_step"/>
+  <menuitem id="menu_approval_condition" name="Approval Conditions" parent="menu_approval_config" action="action_approval_condition"/>
+  <menuitem id="menu_approval_request" name="Approval Requests" parent="menu_approval_root" action="action_approval_request" groups="base.group_system" />
+  <menuitem id="menu_approval_history" name="Approval History" parent="menu_approval_root" action="action_approval_history" groups="base.group_system"/>
+
+</odoo>

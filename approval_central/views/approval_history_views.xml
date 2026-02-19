@@ -1,0 +1,55 @@
+<odoo>
+  <record id="view_approval_history_tree" model="ir.ui.view">
+    <field name="name">approval.history.tree</field>
+    <field name="model">approval.history</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="request_id"/>
+        <field name="step_id"/>
+        <field name="user_id"/>
+        <field name="action_id"/>
+        <field name="date"/>
+        <field name="comment"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_approval_history_form" model="ir.ui.view">
+    <field name="name">approval.history.form</field>
+    <field name="model">approval.history</field>
+    <field name="arch" type="xml">
+      <form>
+<!--        <header>-->
+<!--          <button name="action_open_request" type="object" string="Open Request" class="btn-primary"/>-->
+<!--        </header>-->
+        <sheet>
+<!--          <group>-->
+<!--            <field name="request_id"/>-->
+<!--            <field name="request_flow_id"/>-->
+<!--            <field name="request_status"/>-->
+<!--            <field name="request_requested_by"/>-->
+<!--            <field name="request_res_model"/>-->
+<!--            <field name="request_res_id"/>-->
+<!--          </group>-->
+          <group>
+            <field name="step_id"/>
+            <field name="user_id"/>
+            <field name="action_id"/>
+            <field name="date"/>
+            <field name="comment"/>
+          </group>
+<!--          <group>-->
+<!--            <label for="request_step_progress"/>-->
+<!--            <field name="request_step_progress" widget="html" readonly="1"/>-->
+<!--          </group>-->
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_approval_history" model="ir.actions.act_window">
+    <field name="name">Approval History</field>
+    <field name="res_model">approval.history</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>
